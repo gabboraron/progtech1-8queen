@@ -82,7 +82,7 @@ public class GridButtonPanel {
     }
 
     public void display() {
-        JFrame f = new JFrame("GridButton");
+        JFrame f = new JFrame("8 QUEENS PROBLEM");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         f.add(createNavPanel(), BorderLayout.NORTH);
@@ -105,9 +105,9 @@ public class GridButtonPanel {
 
     private JPanel createNavPanel() {
         JPanel p = new JPanel(new BorderLayout());
-        JButton rBtn = new JButton("RESET");
-        JButton bBtn = new JButton("BACK");
-        JLabel tLabel = new JLabel("TIME: 0");
+        JButton rBtn = gui.reset();
+        JButton bBtn = gui.back();
+        JLabel tLabel = gui.timerLabel();
         
         p.add(rBtn, BorderLayout.EAST);
         p.add(bBtn, BorderLayout.WEST);

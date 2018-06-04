@@ -222,6 +222,13 @@ public class queens {
         return false;
     }
     
+    /**
+     * remove all queens from the list.
+     */
+    public void reset(){
+        queens.removeAllElements();
+    }
+    
     
     
 }

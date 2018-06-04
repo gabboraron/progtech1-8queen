@@ -1,7 +1,12 @@
 package megoldasgriddel;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -73,6 +78,9 @@ public class gui {
         showQueens();
     }
 
+    /**
+     * Show queens on the grid
+     */
     private void showQueens() {
         for(int idx=0; idx< queens.getQueens().size(); ++idx){
             coordinate tmpCoord = (coordinate) queens.getQueens().get(idx);
@@ -80,9 +88,53 @@ public class gui {
         }
     }
     
-    private void back(){
-        queens.removeLastQueen();
-        colorAsChessTable(gpanel);
-        showQueens();
+    /**
+     * The BACK button
+     */
+    public JButton back(){
+        JButton btn = new JButton("BACK");
+        btn.setFont(new Font("Arial", Font.PLAIN, 30));
+
+        btn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                queens.removeLastQueen();
+                colorAsChessTable(gpanel);
+                showQueens();
+            }
+        });
+        
+        return btn;
+    }
+    
+    /**
+     * The RESET button
+     */
+    public JButton reset(){
+        JButton btn = new JButton("RESET");
+        btn.setFont(new Font("Arial", Font.PLAIN, 30));
+
+        btn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                queens.reset();
+                colorAsChessTable(gpanel);
+            }
+        });
+        
+        return btn;
+    }
+    
+    /**
+     * Timer label.
+     * @return 
+     */
+    public JLabel timerLabel(){
+        JLabel lbl = new JLabel("Time: 0");
+        lbl.setFont(new Font("Arial", Font.PLAIN, 30));
+        
+        return lbl;
     }
 }
