@@ -1,5 +1,7 @@
 package megoldasgriddel;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -46,7 +48,7 @@ public class queens {
      * @return vector of coordinates
      * @see coordinate
      */
-    public Vector availableTiles(){
+    /*public Vector availableTiles(){
         System.out.println("CURRENT QUEENS: " + queens);
         Vector at = new Vector();
         //set vectorwith all of elements.
@@ -94,17 +96,78 @@ public class queens {
                 at.remove(tmpCoord);
                 --idxX;
                 ++idxY;
-            }
-            /*for(int idxI=0; idxI<GridButtonPanel.N; ++idxI){
-                for(int idxJ=0; idxJ<GridButtonPanel.N; ++idxJ){
-                    
-                }
             }*/
+    public Vector availableTiles(){
+        System.out.println("CURRENT QUEENS: " + queens);
+        ArrayList  nat = new ArrayList ();  //not available tiles
+        ArrayList  at = new ArrayList ();   //available tiles
+                
+        //put the wrong values to the vector nat
+        for(int idx=0; idx<queens.size(); ++idx){
+            nat.add(queens.get(idx));
+            System.out.println("REMOVED \t the clciked value " + queens.get(idx));
+            //delete row
+            for (int idxR=0; idxR<GridButtonPanel.N; ++idxR){
+                coordinate tmpCoord = new coordinate (((coordinate) queens.get(idx)).x, idxR);
+                //tmpCoord.y = idxR;
+                nat.add(tmpCoord);
+                System.out.println("REMOVED: \t the row " + tmpCoord);
+            }
+            
+            //delete column
+            for (int idxC=0; idxC<GridButtonPanel.N; ++idxC){
+                coordinate tmpCoord = new coordinate (idxC, ((coordinate) queens.get(idx)).y);
+                //tmpCoord.x = idxC;
+                nat.add(tmpCoord);
+                System.out.println("REMOVED \t the column " + tmpCoord);
+            }
+            
+            //delete diagonal1
+            coordinate tmpCoordOfCurrentQ = (coordinate) queens.get(idx);
+            int idxX = tmpCoordOfCurrentQ.x+1;
+            int idxY = tmpCoordOfCurrentQ.y+1;
+            while(idxX != GridButtonPanel.N ){
+                coordinate tmpCoord = new coordinate(idxX,idxY);
+                nat.add(tmpCoord);
+                ++idxX;
+                ++idxY;
+                System.out.println("REMOVED \t the diagonal1 " + tmpCoord);
+            }
+            
+            //delete diagonal2
+            idxX = tmpCoordOfCurrentQ.x;
+            idxY = tmpCoordOfCurrentQ.y;
+            while(idxX != -1 ){
+                coordinate tmpCoord = new coordinate(idxX,idxY);
+                nat.add(tmpCoord);
+                --idxX;
+                ++idxY;
+                System.out.println("REMOVED \t the diagonal2 " + tmpCoord);
+            }
+        }
+        
+        //set vector with all of available elements.
+        for (int i = 0; i < GridButtonPanel.N * GridButtonPanel.N; i++) {
+            int row = i / GridButtonPanel.N;
+            int col = i % GridButtonPanel.N;
+            coordinate coord = new coordinate(row, col);
+            if(!nat.contains(coord)){
+                at.add(coord);
+            } else {
+                System.out.println("not CONTAINS: " + coord);
+            }
         }
         
         System.out.println("CURRENT QUEENS: " + queens);
         System.out.println("AVAILABLE TILES: " + at);
-        return at;
+        System.out.println("NOT AVAILABLE TILES: " + nat);
+        
+        //return a vector
+        Vector vat = new Vector();
+        for (Iterator it = at.iterator(); it.hasNext();) {
+            vat.add(it.next());
+        }
+        return vat;
     }
     
     /**

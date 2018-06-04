@@ -51,6 +51,7 @@ public class gui {
             coordinate tmpCoord = (coordinate) queens.availableTiles().get(idx);
             gpanel.getGridButton(tmpCoord.x, tmpCoord.y).setBackground(Color.gray);
         }
+        System.out.println("*******************************************************");
     }
     
     /** 
