@@ -5,16 +5,21 @@ package megoldasgriddel;
  */
 
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
  
 /**
@@ -54,10 +59,10 @@ public class GridButtonPanel {
                 if(queens.isThisPositionAvailable(row,col)){
                     //SHOW QUEEN
                     b.setFont(new Font("Arial", Font.PLAIN, 40));
-                    b.setText("X");
                     gui.recolorChessTableAndSaveTheQueen(row,col);
                 } else {
                     System.err.println("WRONG BUTTON");
+                    JOptionPane.showMessageDialog(null, "Wronq place for a queen!");    //error msg
                 }
             }
         });
@@ -79,7 +84,9 @@ public class GridButtonPanel {
     public void display() {
         JFrame f = new JFrame("GridButton");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(createGridPanel());
+        
+        f.add(createNavPanel(), BorderLayout.NORTH);
+        f.add(createGridPanel(), BorderLayout.CENTER);
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
@@ -95,4 +102,17 @@ public class GridButtonPanel {
             }
         });
     }*/
+
+    private JPanel createNavPanel() {
+        JPanel p = new JPanel(new BorderLayout());
+        JButton rBtn = new JButton("RESET");
+        JButton bBtn = new JButton("BACK");
+        JLabel tLabel = new JLabel("TIME: 0");
+        
+        p.add(rBtn, BorderLayout.EAST);
+        p.add(bBtn, BorderLayout.WEST);
+        p.add(tLabel, BorderLayout.CENTER);
+        
+        return p;
+    }
 }

@@ -2,6 +2,7 @@ package megoldasgriddel;
 
 import java.awt.Color;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,7 +62,27 @@ public class gui {
         coordinate coord = new coordinate(x,y);
         queens.addAQueen(coord);
         colorAsChessTable(gpanel);
-        showAvailableTiles();
+        if(queens.isDone()){
+            JOptionPane.showMessageDialog(null, "YOU WIN!");
+        } else{
+            showAvailableTiles();
+            if(queens.lose()){
+                JOptionPane.showMessageDialog(null, "YOU LOSE!");
+            }
+        }
+        showQueens();
+    }
+
+    private void showQueens() {
+        for(int idx=0; idx< queens.getQueens().size(); ++idx){
+            coordinate tmpCoord = (coordinate) queens.getQueens().get(idx);
+            gpanel.getGridButton(tmpCoord.x, tmpCoord.y).setText("Q");
+        }
     }
     
+    private void back(){
+        queens.removeLastQueen();
+        colorAsChessTable(gpanel);
+        showQueens();
+    }
 }

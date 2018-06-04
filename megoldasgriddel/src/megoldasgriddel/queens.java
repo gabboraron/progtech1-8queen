@@ -193,5 +193,35 @@ public class queens {
 
         return false;
     }
+
+    /**
+     * True if the number of queens is 8
+     * @return 
+     */
+    boolean isDone() {
+        if(queens.size() == 8)
+            return true;
+        return false;
+    }
+
+    /***
+     * True if the player loose, false if not
+     * @return 
+     */
+    boolean lose() {
+        if(availableTiles().size() == 0)
+            return true;
+        
+        //get if is no more available place in the next column
+        //boolean nextColumn = false;
+        for(int idx = 0; idx<availableTiles().size(); ++idx){
+            if(((coordinate) queens.get(queens.size()-1)).y == ((coordinate)  availableTiles().get(idx)).y)
+                return true;
+        }
+        
+        return false;
+    }
+    
+    
     
 }
