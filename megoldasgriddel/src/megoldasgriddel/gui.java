@@ -132,7 +132,8 @@ public class gui {
      * @return 
      */
     public JLabel timerLabel(){
-        JLabel lbl = new JLabel("Time: 0");
+        //timer time = new timer(this);
+        JLabel lbl = new JLabel("Time: ");
         lbl.setFont(new Font("Arial", Font.PLAIN, 30));
         
         return lbl;
